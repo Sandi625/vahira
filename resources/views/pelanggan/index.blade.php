@@ -20,8 +20,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $paket->nama_paket }}</h5>
                             <p class="card-text">{{ Str::limit($paket->deskripsi, 100) }}</p>
-                            <p class="card-text"><strong>Harga:</strong> Rp {{ number_format($paket->harga, 0, ',', '.') }}
-                            </p>
+                            <p class="card-text"><strong>Harga:</strong> Rp {{ number_format($paket->harga, 0, ',', '.') }}</p>
                         </div>
                         <div class="card-footer bg-transparent border-top-0 text-center">
                             <a href="{{ route('pesanan.create', ['id_paket' => $paket->id]) }}"
@@ -32,4 +31,18 @@
             @endforeach
         </div>
     </div>
+@endsection
+
+@section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    @if(session('success'))
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil!',
+            text: '{{ session('success') }}',
+            confirmButtonText: 'OK'
+        });
+    @endif
+</script>
 @endsection

@@ -46,7 +46,7 @@ class PesananController extends Controller
     // Kirim email notifikasi
     Mail::to('vahiragestalia1212@gmail.com')->send(new PesananBaruMail($validated));
 
-return redirect()->route('pelanggan.index')->with('success', 'Pesanan berhasil dibuat.');
+return redirect()->route('pelanggan.index')->with('success', 'Berhasil memesan paket trip');
 }
 
 

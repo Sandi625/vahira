@@ -1,4 +1,4 @@
-@extends('layout.app') {{-- Sesuaikan dengan layout kamu --}}
+@extends('layout.app')
 
 @section('content')
 @php
@@ -79,20 +79,19 @@
         <a href="{{ route('pakets.index') }}" class="btn btn-secondary">Batal</a>
     </form>
 </div>
+@endsection
 
-{{-- SweetAlert2 --}}
-@if (session('success'))
+{{-- SECTION UNTUK SCRIPT DIPISAH --}}
+@section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        @if(session('success'))
             Swal.fire({
                 icon: 'success',
                 title: 'Berhasil!',
-                text: @json(session('success')),
-                confirmButtonColor: '#3085d6',
+                text: '{{ session('success') }}',
                 confirmButtonText: 'OK'
             });
-        });
+        @endif
     </script>
-@endif
 @endsection
