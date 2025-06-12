@@ -2,6 +2,8 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AkunUsersController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PaketController;
 use App\Http\Controllers\LandingController;
@@ -58,3 +60,20 @@ Route::get('/dashboard-pelanggan', [HalamanPelangganController::class, 'dashboar
 
 
 Route::get('/', [LandingController::class, 'index'])->name('landing.page');
+
+//admin
+Route::middleware(['auth'])->group(function () {
+    Route::get('/pengaturan-akun', [UserController::class, 'edit'])->name('akunadmin.edit');
+    Route::put('/pengaturan-akun', [UserController::class, 'update'])->name('akunadmin.update'); // ganti dari POST ke PUT
+    Route::get('/akun', [UserController::class, 'index'])->name('akun.index');
+});
+
+
+//user
+Route::middleware('auth')->group(function () {
+Route::get('/akunuser', [AkunUsersController::class, 'index'])->name('akun.profile');
+    Route::get('/akunuser/edit', [AkunUsersController::class, 'editProfile'])->name('akun.edit');
+    Route::put('/akunuser/update', [AkunUsersController::class, 'updateProfile'])->name('akun.update');
+
+});
+

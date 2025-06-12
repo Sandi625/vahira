@@ -14,6 +14,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Reservasi</th>
+                    <th>No HP</th>
                     <th>Jumlah</th>
                     <th>Metode</th>
                     <th>Status</th>
@@ -25,6 +26,8 @@
                 @foreach ($pembayarans as $pembayaran)
                     <tr>
                         <td>{{ $pembayaran->id_pembayaran }}</td>
+                        <td>{{ $pembayaran->reservasi->no_hp ?? '-' }}</td>
+
                         <td>
                             {{ $pembayaran->reservasi->customer->nama_customer ?? '-' }} -
                             {{ $pembayaran->reservasi->tujuan ?? '-' }}

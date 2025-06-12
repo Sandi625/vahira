@@ -14,7 +14,7 @@
 <img src="{{ asset('AdminLTE/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
               </div>
               <div class="info">
-                  <a href="#" class="d-block">Alexander Pierce</a>
+                  <a href="#" class="d-block">Admin</a>
               </div>
           </div>
 
@@ -106,6 +106,13 @@
                         <p>Pesanan</p>
                     </a>
                 </li>
+               <li class="nav-item">
+    <a href="{{ route('akun.index') }}" class="nav-link {{ request()->is('akun*') ? 'active' : '' }}">
+        <i class="far fa-circle nav-icon"></i>
+        <p>Pengaturan Akun</p>
+    </a>
+</li>
+
             </ul>
         </li>
 

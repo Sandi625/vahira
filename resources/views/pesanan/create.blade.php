@@ -76,7 +76,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Simpan Pesanan</button>
-        <a href="{{ route('pakets.index') }}" class="btn btn-secondary">Batal</a>
+        <a href="{{ route('pelanggan.index') }}" class="btn btn-secondary">Batal</a>
     </form>
 </div>
 @endsection

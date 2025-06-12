@@ -40,6 +40,18 @@
         </a>
     </li>
 
+   <li class="nav-item">
+    <a href="{{ route('akun.profile') }}"
+       class="nav-link {{ request()->routeIs('akun.profile') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-user"></i>
+        <p>
+            Pengaturan Akun
+        </p>
+    </a>
+</li>
+
+
+
     <!-- Logout Link -->
     <li class="nav-item">
         <a href="{{ route('logout') }}" class="nav-link"
