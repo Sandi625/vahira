@@ -30,15 +30,33 @@
         </a>
     </li>
 
-    <li class="nav-item">
-        <a href="{{ route('pelanggan.index') }}"
-            class="nav-link {{ request()->routeIs('pelanggan.index') ? 'active' : '' }}">
+     <li class="nav-item">
+        <a href="{{ route('reservasi.pelanggan.create') }}"
+            class="nav-link {{ request()->routeIs('reservasi.pelanggan.create') ? 'active' : '' }}">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
                 Reservasi Online
             </p>
         </a>
     </li>
+
+
+    <li class="nav-item">
+        <a href="{{ route('pelanggan.index') }}"
+            class="nav-link {{ request()->routeIs('pelanggan.index') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+                Pesan
+            </p>
+        </a>
+    </li>
+    <li class="nav-item">
+    <a href="{{ route('user.status.pembayaran') }}"
+        class="nav-link {{ request()->routeIs('user.status.pembayaran') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-money-check-alt"></i>
+        <p>Status Pembayaran</p>
+    </a>
+</li>
 
    <li class="nav-item">
     <a href="{{ route('akun.profile') }}"

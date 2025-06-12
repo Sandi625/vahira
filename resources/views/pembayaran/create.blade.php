@@ -16,22 +16,25 @@
 
         <form action="{{ route('pembayaran.store') }}" method="POST">
             @csrf
-            <div class="form-group mb-3">
-                <label>Reservasi</label>
-                <select name="id_reservasi" class="form-control" required>
-                    <option value="">Pilih Reservasi</option>
-                    @foreach ($reservasis as $reservasi)
-                        <option value="{{ $reservasi->id_reservasi }}">
-                            {{ $reservasi->customer->nama_customer ?? '-' }} - {{ $reservasi->tujuan }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
+        <div class="form-group mb-3">
+    <label>Reservasi</label>
+    <select name="id_reservasi" class="form-control" required>
+        <option value="">Pilih Reservasi</option>
+        @foreach ($reservasis as $reservasi)
+            <option value="{{ $reservasi->id_reservasi }}">
+                [{{ $reservasi->customer->id_customer ?? '-' }}]
+                {{ $reservasi->customer->nama_customer ?? $reservasi->nama_customer ?? '-' }} - {{ $reservasi->tujuan ?? '-' }}
+            </option>
+        @endforeach
+    </select>
+</div>
+
 
             <div class="form-group mb-3">
                 <label>Jumlah Pembayaran</label>
                 <input type="number" name="jumlah_pembayaran" class="form-control" required>
             </div>
+
             <div class="form-group mb-3">
                 <label>Metode Pembayaran</label>
                 <select name="metode_pembayaran" class="form-control" required>
@@ -54,8 +57,10 @@
                 <label>Tanggal Pembayaran</label>
                 <input type="date" name="tanggal_pembayaran" class="form-control" required>
             </div>
+
             <button type="submit" class="btn btn-primary">Simpan</button>
             <a href="{{ route('pembayaran.index') }}" class="btn btn-secondary">Kembali</a>
         </form>
     </div>
 @endsection
+

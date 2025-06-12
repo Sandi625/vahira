@@ -13,8 +13,10 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Reservasi</th>
+                    <th>ID Customer</th>
+                    <th>Nama Customer</th>
                     <th>No HP</th>
+                    <th>Tujuan</th>
                     <th>Jumlah</th>
                     <th>Metode</th>
                     <th>Status</th>
@@ -24,26 +26,27 @@
             </thead>
             <tbody>
                 @foreach ($pembayarans as $pembayaran)
+                    @php
+                        $reservasi = $pembayaran->reservasi;
+                        $customer = $reservasi->customer ?? null;
+                    @endphp
                     <tr>
                         <td>{{ $pembayaran->id_pembayaran }}</td>
-                        <td>{{ $pembayaran->reservasi->no_hp ?? '-' }}</td>
-
-                        <td>
-                            {{ $pembayaran->reservasi->customer->nama_customer ?? '-' }} -
-                            {{ $pembayaran->reservasi->tujuan ?? '-' }}
-                        </td>
+                        <td>{{ $customer->id_customer ?? '-' }}</td>
+                        <td>{{ $customer->nama_customer ?? $reservasi->nama_customer ?? '-' }}</td>
+                        <td>{{ $reservasi->no_hp ?? '-' }}</td>
+                        <td>{{ $reservasi->tujuan ?? '-' }}</td>
                         <td>{{ number_format($pembayaran->jumlah_pembayaran) }}</td>
                         <td>{{ $pembayaran->metode_pembayaran }}</td>
                         <td>
                             @if ($pembayaran->status_pembayaran == 'DITERIMA')
                                 <span class="badge bg-success">DITERIMA</span>
-                            @elseif($pembayaran->status_pembayaran == 'TIDAK DITERIMA')
+                            @elseif ($pembayaran->status_pembayaran == 'TIDAK DITERIMA')
                                 <span class="badge bg-danger">TIDAK DITERIMA</span>
                             @else
                                 <span class="badge bg-secondary">-</span>
                             @endif
                         </td>
-
                         <td>{{ $pembayaran->tanggal_pembayaran }}</td>
                         <td>
                             <a href="{{ route('pembayaran.edit', $pembayaran->id_pembayaran) }}"
@@ -62,3 +65,4 @@
         </table>
     </div>
 @endsection
+

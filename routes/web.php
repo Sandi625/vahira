@@ -2,19 +2,21 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\AkunUsersController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PaketController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\AkunUsersController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PenumpangController;
 use App\Http\Controllers\ReservasiController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\StatusPembayaranUser;
 use App\Http\Controllers\HalamanPelangganController;
+use App\Http\Controllers\ReservasiPelangganController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -77,3 +79,9 @@ Route::get('/akunuser', [AkunUsersController::class, 'index'])->name('akun.profi
 
 });
 
+
+
+Route::get('/reservasi/pelanggan/create', [ReservasiPelangganController::class, 'create'])->name('reservasi.pelanggan.create');
+Route::post('/reservasi/pelanggan/store', [ReservasiPelangganController::class, 'store'])->name('reservasi.pelanggan.store');
+
+Route::get('/status-pembayaran', [StatusPembayaranUser::class, 'index'])->name('user.status.pembayaran');

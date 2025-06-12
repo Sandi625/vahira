@@ -14,9 +14,12 @@ class Reservasi extends Model
 
     protected $fillable = [
         'id_customer',
+        'nama_customer',
         'tujuan',
         'no_hp',
         'tanggal_reservasi',
+        'bukti_pembayaran',
+        'id_user',
     ];
 
     protected $casts = [
@@ -28,6 +31,14 @@ class Reservasi extends Model
     {
         return $this->belongsTo(Customer::class, 'id_customer', 'id_customer');
     }
+
+    public function user()
+{
+    return $this->belongsTo(User::class, 'id_user');
+}
+
+
+
 
 }
 
