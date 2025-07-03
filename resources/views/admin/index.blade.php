@@ -12,7 +12,7 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>No</th> {{-- Ganti dari ID --}}
                     <th>Nama</th>
                     <th>Email</th>
                     <th>Aksi</th>
@@ -21,7 +21,7 @@
             <tbody>
                 @foreach($admins as $admin)
                     <tr>
-                        <td>{{ $admin->id_admin }}</td>
+                        <td>{{ $loop->iteration }}</td> {{-- Nomor urut --}}
                         <td>{{ $admin->nama_admin }}</td>
                         <td>{{ $admin->email }}</td>
                         <td>
@@ -38,3 +38,4 @@
         </table>
     </div>
 @endsection
+

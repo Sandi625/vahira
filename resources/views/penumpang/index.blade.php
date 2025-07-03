@@ -12,7 +12,7 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>No</th> {{-- Ganti dari ID --}}
                     <th>Reservasi</th>
                     <th>Nama</th>
                     <th>Alamat</th>
@@ -22,12 +22,12 @@
             <tbody>
                 @foreach($penumpangs as $penumpang)
                     <tr>
-                        <td>{{ $penumpang->id_pelanggan }}</td>
-<td>
-    {{-- {{ $penumpang->id_pelanggan }} - --}}
-    {{ $penumpang->reservasi->customer->nama_customer ?? '-' }} -
-    {{ $penumpang->reservasi->tujuan ?? '-' }}
-</td>                        <td>{{ $penumpang->nama }}</td>
+                        <td>{{ $loop->iteration }}</td> {{-- Nomor urut --}}
+                        <td>
+                            {{ $penumpang->reservasi->customer->nama_customer ?? '-' }} -
+                            {{ $penumpang->reservasi->tujuan ?? '-' }}
+                        </td>
+                        <td>{{ $penumpang->nama }}</td>
                         <td>{{ $penumpang->alamat }}</td>
                         <td>
                             <a href="{{ route('penumpang.edit', $penumpang->id_pelanggan) }}" class="btn btn-sm btn-warning">Edit</a>
@@ -43,3 +43,4 @@
         </table>
     </div>
 @endsection
+

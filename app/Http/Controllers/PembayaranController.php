@@ -56,11 +56,8 @@ class PembayaranController extends Controller
 
 protected function kirimNotifikasiWhatsAppFonte($nomorTujuan, $pesan)
 {
-    // Ganti 'YOUR_API_KEY' dengan API key dari Fonte
-    $apiKey = 'YOUR_API_KEY';
-
-    // Format nomor ke internasional jika perlu
-    $nomorTujuan = preg_replace('/^0/', '62', $nomorTujuan); // contoh: 0812... → 62812...
+    $apiKey = 'rtz7dDtCCpoKDf76rBZe';
+    $nomorTujuan = preg_replace('/^0/', '62', $nomorTujuan); // Format nomor
 
     $response = Http::withHeaders([
         'Authorization' => $apiKey,
@@ -68,10 +65,19 @@ protected function kirimNotifikasiWhatsAppFonte($nomorTujuan, $pesan)
     ])->post('https://api.fonte.com/send-message', [
         'receiver' => $nomorTujuan,
         'message' => $pesan,
+        // 'type' => 'text', // tambahkan jika diperlukan oleh API Fonte
     ]);
 
-    Log::info('Response FONTE:', [$response->body()]);
+    if ($response->successful()) {
+        Log::info('Notifikasi WhatsApp berhasil dikirim.', ['response' => $response->json()]);
+    } else {
+        Log::error('Gagal mengirim notifikasi WhatsApp.', [
+            'status' => $response->status(),
+            'body' => $response->body()
+        ]);
+    }
 }
+
 
 
 

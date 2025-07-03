@@ -12,7 +12,7 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>No</th> {{-- Ganti dari ID --}}
                     <th>ID Customer</th>
                     <th>Nama Customer</th>
                     <th>No HP</th>
@@ -31,7 +31,7 @@
                         $customer = $reservasi->customer ?? null;
                     @endphp
                     <tr>
-                        <td>{{ $pembayaran->id_pembayaran }}</td>
+                        <td>{{ $loop->iteration }}</td> {{-- Nomor urut --}}
                         <td>{{ $customer->id_customer ?? '-' }}</td>
                         <td>{{ $customer->nama_customer ?? $reservasi->nama_customer ?? '-' }}</td>
                         <td>{{ $reservasi->no_hp ?? '-' }}</td>
@@ -49,14 +49,11 @@
                         </td>
                         <td>{{ $pembayaran->tanggal_pembayaran }}</td>
                         <td>
-                            <a href="{{ route('pembayaran.edit', $pembayaran->id_pembayaran) }}"
-                                class="btn btn-sm btn-warning">Edit</a>
-                            <form action="{{ route('pembayaran.destroy', $pembayaran->id_pembayaran) }}" method="POST"
-                                style="display:inline;">
+                            <a href="{{ route('pembayaran.edit', $pembayaran->id_pembayaran) }}" class="btn btn-sm btn-warning">Edit</a>
+                            <form action="{{ route('pembayaran.destroy', $pembayaran->id_pembayaran) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button onclick="return confirm('Yakin ingin menghapus?')"
-                                    class="btn btn-sm btn-danger">Hapus</button>
+                                <button onclick="return confirm('Yakin ingin menghapus?')" class="btn btn-sm btn-danger">Hapus</button>
                             </form>
                         </td>
                     </tr>
@@ -65,4 +62,5 @@
         </table>
     </div>
 @endsection
+
 

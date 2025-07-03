@@ -12,7 +12,7 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>No</th> {{-- Ganti dari ID --}}
                     <th>Nama Customer</th>
                     <th>Email Customer</th>
                     <th>Admin</th>
@@ -22,7 +22,7 @@
             <tbody>
                 @foreach($customers as $customer)
                     <tr>
-                        <td>{{ $customer->id_customer }}</td>
+                        <td>{{ $loop->iteration }}</td> {{-- Nomor urut --}}
                         <td>{{ $customer->nama_customer }}</td>
                         <td>{{ $customer->email_customer }}</td>
                         <td>{{ $customer->admin->nama_admin ?? '-' }}</td>
