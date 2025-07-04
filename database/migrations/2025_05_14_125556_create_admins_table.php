@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('admins', function (Blueprint $table) {
     $table->id('id_admin');
+    $table->unsignedBigInteger('user_id'); // foreign key ke tabel users
+
     $table->string('nama_admin');
     $table->string('email')->unique();
     $table->string('password');

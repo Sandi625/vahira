@@ -85,3 +85,5 @@ Route::get('/reservasi/pelanggan/create', [ReservasiPelangganController::class, 
 Route::post('/reservasi/pelanggan/store', [ReservasiPelangganController::class, 'store'])->name('reservasi.pelanggan.store');
 
 Route::get('/status-pembayaran', [StatusPembayaranUser::class, 'index'])->name('user.status.pembayaran');
+
+

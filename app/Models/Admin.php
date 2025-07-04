@@ -15,6 +15,7 @@ class Admin extends Model
         'nama_admin',
         'email',
         'password',
+        'user_id',
     ];
 
     // Jika Anda menggunakan hashing untuk password, pastikan untuk meng-hash password sebelum menyimpannya
@@ -26,4 +27,10 @@ class Admin extends Model
             $admin->password = bcrypt($admin->password); // Meng-hash password
         });
     }
+
+    public function user()
+{
+    return $this->belongsTo(User::class);
+}
+
 }
