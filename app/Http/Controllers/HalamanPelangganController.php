@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reservasi;
-use App\Models\Reservation; // Assuming you have a Reservation model
+use App\Models\Pembayaran;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Reservation; // Assuming you have a Reservation model
 
 class HalamanPelangganController extends Controller
 {
@@ -31,9 +34,16 @@ class HalamanPelangganController extends Controller
     }
 
     // Add a method for the dashboard page
-    public function dashboard()
-    {
-        // You can pass any required data to the view here
-        return view('pelanggan.dashboard');
-    }
+public function dashboard()
+{
+    $user = Auth::user();
+
+    $pembayarans = Pembayaran::whereHas('reservasi', function ($query) use ($user) {
+        $query->where('id_user', $user->id);
+    })->with('reservasi')->latest()->get();
+
+    return view('pelanggan.dashboard', compact('pembayarans'));
+}
+
+
 }

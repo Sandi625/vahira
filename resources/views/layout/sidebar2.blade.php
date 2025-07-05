@@ -13,78 +13,80 @@
                     alt="User Image">
             </div>
             <div class="info">
-<a href="#" class="d-block">
-    {{ Auth::check() ? Auth::user()->name : 'Guest' }}
-</a>            </div>
+                <a href="#" class="d-block">
+                    {{ Auth::check() ? Auth::user()->name : 'Guest' }}
+                </a>
+            </div>
         </div>
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
-           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-    <li class="nav-item">
-        <a href="{{ route('dashboardpelanggan') }}"
-            class="nav-link {{ request()->routeIs('dashboardpelanggan') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
-            <p>
-                Dashboard
-            </p>
-        </a>
-    </li>
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                data-accordion="false">
+                <li class="nav-item">
+                    <a href="{{ route('dashboardpelanggan') }}"
+                        class="nav-link {{ request()->routeIs('dashboardpelanggan') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Dashboard
+                        </p>
+                    </a>
+                </li>
 
-     <li class="nav-item">
-        <a href="{{ route('reservasi.pelanggan.create') }}"
-            class="nav-link {{ request()->routeIs('reservasi.pelanggan.create') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
-            <p>
-                Reservasi Online
-            </p>
-        </a>
-    </li>
-
-
-    <li class="nav-item">
-        <a href="{{ route('pelanggan.index') }}"
-            class="nav-link {{ request()->routeIs('pelanggan.index') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
-            <p>
-                Pesan
-            </p>
-        </a>
-    </li>
-    <li class="nav-item">
-    <a href="{{ route('user.status.pembayaran') }}"
-        class="nav-link {{ request()->routeIs('user.status.pembayaran') ? 'active' : '' }}">
-        <i class="nav-icon fas fa-money-check-alt"></i>
-        <p>Status Pembayaran</p>
-    </a>
-</li>
-
-   <li class="nav-item">
-    <a href="{{ route('akun.profile') }}"
-       class="nav-link {{ request()->routeIs('akun.profile') ? 'active' : '' }}">
-        <i class="nav-icon fas fa-user"></i>
-        <p>
-            Pengaturan Akun
-        </p>
-    </a>
-</li>
+                <li class="nav-item">
+                    <a href="{{ route('reservasi.pelanggan.create') }}"
+                        class="nav-link {{ request()->routeIs('reservasi.pelanggan.create') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Reservasi Online
+                        </p>
+                    </a>
+                </li>
 
 
+                <li class="nav-item">
+                    <a href="{{ route('pelanggan.index') }}"
+                        class="nav-link {{ request()->routeIs('pelanggan.index') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Pesan
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('user.status.pembayaran') }}"
+                        class="nav-link {{ request()->routeIs('user.status.pembayaran') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-money-check-alt"></i>
+                        <p>Status Pembayaran</p>
+                    </a>
+                </li>
 
-    <!-- Logout Link -->
-    <li class="nav-item">
-        <a href="{{ route('logout') }}" class="nav-link"
-            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-            <i class="nav-icon fas fa-sign-out-alt"></i>
-            <p>
-                Logout
-            </p>
-        </a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            @csrf
-        </form>
-    </li>
-</ul>
+                <li class="nav-item">
+                    <a href="{{ route('akun.profile') }}"
+                        class="nav-link {{ request()->routeIs('akun.profile') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>
+                            Pengaturan Akun
+                        </p>
+                    </a>
+                </li>
+
+
+
+                <!-- Logout Link -->
+                <li class="nav-item">
+                    <a href="{{ route('logout') }}" class="nav-link"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="nav-icon fas fa-sign-out-alt"></i>
+                        <p>
+                            Logout
+                        </p>
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </li>
+            </ul>
 
         </nav>
     </div>

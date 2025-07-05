@@ -27,7 +27,7 @@ class PembayaranController extends Controller
     return view('pembayaran.create', compact('reservasis'));
 }
 
-  public function store(Request $request)
+public function store(Request $request)
 {
     $request->validate([
         'id_reservasi'       => 'required|exists:reservasis,id_reservasi',
@@ -44,37 +44,56 @@ class PembayaranController extends Controller
     $reservasi = Reservasi::find($request->id_reservasi);
 
     if ($reservasi && $reservasi->no_hp) {
-        $pesan = "Halo {$reservasi->nama_customer}, pembayaran sebesar Rp " . number_format($request->jumlah_pembayaran, 0, ',', '.') .
-                 " untuk reservasi tujuan {$reservasi->tujuan} telah kami terima. Terima kasih 🙏.";
+        // Tentukan pesan sesuai status pembayaran
+        if ($request->status_pembayaran === 'DITERIMA') {
+            $pesan = "Halo {$reservasi->nama_customer}, pembayaran sebesar Rp " . number_format($request->jumlah_pembayaran, 0, ',', '.') .
+                     " untuk reservasi tujuan {$reservasi->tujuan} telah *DITERIMA*. Terima kasih 🙏.\n\n" .
+                     "Salam hangat,\nBintoro Travel ✈";
+        } else {
+            $pesan = "Halo {$reservasi->nama_customer}, maaf, pembayaran sebesar Rp " . number_format($request->jumlah_pembayaran, 0, ',', '.') .
+                     " untuk reservasi tujuan {$reservasi->tujuan} *TIDAK DITERIMA*. Silakan hubungi admin untuk informasi lebih lanjut.\n\n" .
+                     "Salam hangat,\nBintoro Travel ✈";
+        }
 
-        $this->kirimNotifikasiWhatsAppFonte($reservasi->no_hp, $pesan);
+        // Kirim pesan WhatsApp via Fonnte
+        $this->kirimNotifikasiWhatsAppFonnte($reservasi->no_hp, $pesan);
     }
 
     return redirect()->route('pembayaran.index')->with('success', 'Data pembayaran berhasil ditambahkan dan notifikasi dikirim.');
 }
 
 
-protected function kirimNotifikasiWhatsAppFonte($nomorTujuan, $pesan)
+
+
+protected function kirimNotifikasiWhatsAppFonnte($nomorTujuan, $pesan)
 {
-    $apiKey = 'rtz7dDtCCpoKDf76rBZe';
-    $nomorTujuan = preg_replace('/^0/', '62', $nomorTujuan); // Format nomor
+    if (!env('FONTE_ENABLED', false)) {
+        Log::info('Fitur Fonnte dinonaktifkan, notifikasi tidak dikirim.');
+        return;
+    }
 
-    $response = Http::withHeaders([
-        'Authorization' => $apiKey,
-        'Accept' => 'application/json',
-    ])->post('https://api.fonte.com/send-message', [
-        'receiver' => $nomorTujuan,
-        'message' => $pesan,
-        // 'type' => 'text', // tambahkan jika diperlukan oleh API Fonte
-    ]);
+    $apiKey = env('FONTE_API_KEY');
+    $nomorTujuan = preg_replace('/^0/', '62', $nomorTujuan); // Format nomor Indonesia
 
-    if ($response->successful()) {
-        Log::info('Notifikasi WhatsApp berhasil dikirim.', ['response' => $response->json()]);
-    } else {
-        Log::error('Gagal mengirim notifikasi WhatsApp.', [
-            'status' => $response->status(),
-            'body' => $response->body()
+    try {
+        $response = Http::withHeaders([
+            'Authorization' => $apiKey, // Jangan pakai "Bearer"
+        ])->post('https://api.fonnte.com/send', [
+            'target'  => $nomorTujuan,
+            'message' => $pesan,
         ]);
+
+        if ($response->successful()) {
+            Log::info('Notifikasi WhatsApp berhasil dikirim.', ['response' => $response->json()]);
+        } else {
+            Log::error('Gagal mengirim notifikasi WhatsApp.', [
+                'status' => $response->status(),
+                'body'   => $response->body()
+            ]);
+        }
+
+    } catch (\Exception $e) {
+        Log::error('Exception saat kirim ke Fonnte: ' . $e->getMessage());
     }
 }
 
