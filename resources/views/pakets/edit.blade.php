@@ -34,22 +34,27 @@
             <input type="number" name="harga" class="form-control" required value="{{ old('harga', $paket->harga) }}">
         </div>
 
-       <div class="mb-3">
-    <label for="foto" class="form-label">Foto</label>
-    <input type="file" name="foto" class="form-control" accept="image/*">
-    @if ($paket->foto)
-        <div class="mt-2">
-            <img src="{{ asset($paket->foto) }}" alt="Foto Paket" width="150">
+        <div class="mb-3">
+            <label for="kuota" class="form-label">Kuota Bangku</label>
+            <input type="number" name="kuota" class="form-control" min="0" required value="{{ old('kuota', $paket->kuota) }}">
         </div>
-    @endif
-</div>
-
 
         <div class="mb-3">
-            <label for="status" class="form-label">Status</label>
+            <label for="foto" class="form-label">Foto</label>
+            <input type="file" name="foto" class="form-control" accept="image/*">
+            @if ($paket->foto)
+                <div class="mt-2">
+                    <img src="{{ asset($paket->foto) }}" alt="Foto Paket" width="150">
+                </div>
+            @endif
+        </div>
+
+        <div class="mb-3">
+            <label for="status" class="form-label">Status Kuota</label>
             <select name="status" class="form-select">
-                <option value="1" {{ $paket->status == 1 ? 'selected' : '' }}>Aktif</option>
-                <option value="0" {{ $paket->status == 0 ? 'selected' : '' }}>Tidak Aktif</option>
+                <option value="KOUTA_TERSEDIA" {{ old('status', $paket->status) == 'KOUTA_TERSEDIA' ? 'selected' : '' }}>Kuota Tersedia</option>
+                <option value="KOUTA_PENUH" {{ old('status', $paket->status) == 'KOUTA_PENUH' ? 'selected' : '' }}>Kuota Penuh</option>
+                <option value="BERANGKAT_TANPA_PENUH" {{ old('status', $paket->status) == 'BERANGKAT_TANPA_PENUH' ? 'selected' : '' }}>Berangkat (Tidak Penuh)</option>
             </select>
         </div>
 

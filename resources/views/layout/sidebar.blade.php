@@ -72,21 +72,21 @@
                               </a>
                           </li>
 
-                          <li class="nav-item">
+                          {{-- <li class="nav-item">
                               <a href="{{ route('customer.index') }}"
                                   class="nav-link {{ request()->is('customer') ? 'active' : '' }}">
                                   <i class="far fa-circle nav-icon"></i>
                                   <p>Kelola Customer</p>
                               </a>
-                          </li>
+                          </li> --}}
 
-                          <li class="nav-item">
+                          {{-- <li class="nav-item">
                               <a href="{{ route('pembayaran.index') }}"
                                   class="nav-link {{ request()->is('pembayaran') ? 'active' : '' }}">
                                   <i class="far fa-circle nav-icon"></i>
                                   <p>Pembayaran</p>
                               </a>
-                          </li>
+                          </li> --}}
 
                           <li class="nav-item">
                               <a href="{{ route('penumpang.index') }}"
@@ -111,13 +111,30 @@
                                   <p>Paket Trip</p>
                               </a>
                           </li>
+
                           <li class="nav-item">
+                              <a href="{{ route('banks.index') }}"
+                                  class="nav-link {{ request()->is('banks') ? 'active' : '' }}">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Data Bank</p>
+                              </a>
+                          </li>
+
+                          {{-- <li class="nav-item">
                               <a href="{{ route('pesanan.index') }}"
                                   class="nav-link {{ request()->is('pesanan') ? 'active' : '' }}">
                                   <i class="far fa-circle nav-icon"></i>
                                   <p>Pesanan</p>
                               </a>
-                          </li>
+                          </li> --}}
+                          <li class="nav-item">
+    <a href="{{ route('admin.bukti_tf.index') }}"
+        class="nav-link {{ request()->is('admin/bukti-transfer*') ? 'active' : '' }}">
+        <i class="far fa-circle nav-icon"></i>
+        <p>Bukti Transfer</p>
+    </a>
+</li>
+
                           <li class="nav-item">
                               <a href="{{ route('akun.index') }}"
                                   class="nav-link {{ request()->is('akun*') ? 'active' : '' }}">

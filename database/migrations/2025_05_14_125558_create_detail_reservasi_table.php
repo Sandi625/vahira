@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pembayarans', function (Blueprint $table) {
-            $table->id('id_pembayaran');
+        Schema::create('detail_reservasi', function (Blueprint $table) {
+            $table->id('id');
             $table->unsignedBigInteger('id_reservasi');
-            $table->decimal('jumlah_pembayaran', 15, 2);
-            $table->enum('metode_pembayaran', ['CASH', 'TRANSFER']);
-            $table->enum('status_pembayaran', ['DITERIMA', 'TIDAK DITERIMA'])->default('TIDAK DITERIMA');
-            $table->date('tanggal_pembayaran');
+            $table->string('nama_customer')->nullable();
+            // $table->string('tujuan')->nullable();
+            $table->string('no_hp')->nullable();
+            $table->string('alamat_penjemputan')->nullable();
             $table->timestamps();
 
             $table->foreign('id_reservasi')->references('id_reservasi')->on('reservasis')->onDelete('cascade');

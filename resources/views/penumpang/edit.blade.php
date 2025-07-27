@@ -17,26 +17,35 @@
         <form action="{{ route('penumpang.update', $penumpang->id_pelanggan) }}" method="POST">
             @csrf
             @method('PUT')
+
             <div class="form-group mb-3">
-                <label>Reservasi</label>
+                <label for="id_reservasi">Reservasi</label>
                 <select name="id_reservasi" class="form-control" required>
-            <option value="">Pilih Reservasi</option>
-            @foreach($reservasis as $reservasi)
-                <option value="{{ $reservasi->id_reservasi }}"
-                        {{ $penumpang->id_reservasi == $reservasi->id_reservasi ? 'selected' : '' }}>
-                    {{ $reservasi->customer->nama_customer ?? '-' }} - {{ $reservasi->tujuan }}
-                </option>
-            @endforeach
-        </select>
+                    <option value="">Pilih Reservasi</option>
+                    @foreach($reservasis as $reservasi)
+                        <option value="{{ $reservasi->id_reservasi }}"
+                            {{ $penumpang->id_reservasi == $reservasi->id_reservasi ? 'selected' : '' }}>
+                            {{ $reservasi->customer->nama_customer ?? '-' }} - {{ $reservasi->tujuan }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
+
             <div class="form-group mb-3">
-                <label>Nama</label>
-                <input type="text" name="nama" class="form-control" value="{{ $penumpang->nama }}" required>
+                <label for="id_detail_reservasi">Detail Reservasi</label>
+                <select name="id_detail_reservasi" class="form-control">
+                    <option value="">Tanpa Detail</option>
+                    @foreach($reservasis as $reservasi)
+                        @foreach($reservasi->detailReservasi as $detail)
+                            <option value="{{ $detail->id }}"
+                                {{ $penumpang->id_detail_reservasi == $detail->id ? 'selected' : '' }}>
+                                {{ $detail->nama_customer }}
+                            </option>
+                        @endforeach
+                    @endforeach
+                </select>
             </div>
-            <div class="form-group mb-3">
-                <label>Alamat</label>
-                <textarea name="alamat" class="form-control" required>{{ $penumpang->alamat }}</textarea>
-            </div>
+
             <button type="submit" class="btn btn-primary">Update</button>
             <a href="{{ route('penumpang.index') }}" class="btn btn-secondary">Kembali</a>
         </form>

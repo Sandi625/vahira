@@ -7,20 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Penumpang extends Model
 {
-    use HasFactory;
+    protected $table = 'penumpangs';
+    protected $primaryKey = 'id_pelanggan';
 
-    protected $table = 'penumpangs'; // Nama tabel
-    protected $primaryKey = 'id_pelanggan'; // Kunci utama
+    protected $fillable = ['id_reservasi', 'id_detail_reservasi'];
 
-    protected $fillable = [
-        'id_reservasi',
-        'nama',
-        'alamat',
-    ];
-
-    // Relasi dengan Reservasi
     public function reservasi()
     {
         return $this->belongsTo(Reservasi::class, 'id_reservasi', 'id_reservasi');
     }
+
+  public function detailReservasi()
+{
+    return $this->belongsTo(DetailReservasi::class, 'id_detail_reservasi', 'id');
 }
+}
+

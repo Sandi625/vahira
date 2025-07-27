@@ -15,6 +15,8 @@ return new class extends Migration
     $table->id('id_customer');
     $table->unsignedBigInteger('id_admin');
     $table->string('nama_customer');
+    $table->string('alamat_jemput');
+    $table->string('alamat_tujuan');
     $table->string('email_customer')->unique();
     $table->string('password');
     $table->timestamps();

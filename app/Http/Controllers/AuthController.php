@@ -17,12 +17,13 @@ class AuthController extends Controller
     }
 
     // Handle Registration Logic
-   public function register(Request $request)
+public function register(Request $request)
 {
     // Validasi data
     $validated = $request->validate([
         'name' => 'required|string|max:255',
         'email' => 'required|string|email|max:255|unique:users',
+        'no_hp' => 'required|string|max:20',
         'password' => 'required|string|min:8|confirmed',
     ]);
 
@@ -30,12 +31,14 @@ class AuthController extends Controller
     User::create([
         'name' => $validated['name'],
         'email' => $validated['email'],
+        'no_hp' => $validated['no_hp'],
         'password' => Hash::make($validated['password']),
     ]);
 
     // Kembali ke form dengan pesan sukses (SweetAlert)
     return back()->with('success', 'Pendaftaran berhasil! Data telah disimpan.');
 }
+
 
 
 

@@ -16,7 +16,6 @@
     @endif
 
     <form action="{{ route('pakets.store') }}" method="POST" enctype="multipart/form-data">
-
         @csrf
 
         <div class="mb-3">
@@ -35,15 +34,21 @@
         </div>
 
         <div class="mb-3">
+            <label for="kuota" class="form-label">Kuota Bangku</label>
+            <input type="number" name="kuota" class="form-control" min="0" required value="{{ old('kuota') }}">
+        </div>
+
+        <div class="mb-3">
             <label for="foto" class="form-label">Foto</label>
             <input type="file" name="foto" class="form-control" accept="image/*">
         </div>
 
         <div class="mb-3">
-            <label for="status" class="form-label">Status</label>
+            <label for="status" class="form-label">Status Kuota</label>
             <select name="status" class="form-select">
-                <option value="1" {{ old('status') == '1' ? 'selected' : '' }}>Aktif</option>
-                <option value="0" {{ old('status') == '0' ? 'selected' : '' }}>Tidak Aktif</option>
+                <option value="KOUTA_TERSEDIA" {{ old('status') == 'KOUTA_TERSEDIA' ? 'selected' : '' }}>Kuota Tersedia</option>
+                <option value="KOUTA_PENUH" {{ old('status') == 'KOUTA_PENUH' ? 'selected' : '' }}>Kuota Penuh</option>
+                <option value="BERANGKAT_TANPA_PENUH" {{ old('status') == 'BERANGKAT_TANPA_PENUH' ? 'selected' : '' }}>Berangkat (Tidak Penuh)</option>
             </select>
         </div>
 

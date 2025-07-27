@@ -13,62 +13,65 @@
         <div class="alert alert-info">Data reservasi kosong.</div>
     @else
         <div class="table-responsive">
-         <table class="table table-bordered table-striped">
-<thead class="table-dark">
-    <tr>
-        <th>No</th> {{-- Ganti dari ID ke No --}}
-        <th>Customer</th> {{-- dari relasi customer --}}
-        <th>Customer dari Pelanggan</th> {{-- dari relasi pelanggan --}}
-        <th>Tujuan</th>
-        <th>No HP</th>
-        <th>Tanggal Reservasi</th>
-        <th>Bukti Pembayaran</th>
-        <th>Aksi</th>
-    </tr>
-</thead>
-<tbody>
-    @foreach($reservasis as $reservasi)
-        <tr>
-            <td>{{ $loop->iteration }}</td> {{-- Nomor urut --}}
-            <td>{{ $reservasi->customer->nama_customer ?? '-' }}</td>
-            <td>{{ $reservasi->nama_customer ?? '-' }}</td>
-            <td>{{ $reservasi->tujuan ?? '-' }}</td>
-            <td>{{ $reservasi->no_hp ?? '-' }}</td>
-            <td>{{ $reservasi->tanggal_reservasi->format('d-m-Y') }}</td>
-            <td>
-                @if($reservasi->bukti_pembayaran)
+            <table class="table table-bordered table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Paket</th>
+                        <th>Nama Customer</th>
+                        <th>Alamat</th>
+                        {{-- <th>Tujuan</th> --}}
+                        <th>No HP</th>
+                        {{-- <th>Alamat Penjemputan</th> --}}
+                        <th>Tanggal Pesan</th>
+                        {{-- <th>Bukti Pembayaran</th> --}}
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach($reservasis as $reservasi)
                     @php
-                        $ext = pathinfo($reservasi->bukti_pembayaran, PATHINFO_EXTENSION);
+                        $detail = $reservasi->detailReservasi->first();
                     @endphp
-                    @if(in_array(strtolower($ext), ['jpg','jpeg','png','gif']))
-                        <a href="{{ asset('storage/' . $reservasi->bukti_pembayaran) }}" target="_blank">
-                            <img src="{{ asset('storage/' . $reservasi->bukti_pembayaran) }}" alt="Bukti" width="60">
-                        </a>
-                    @else
-                        <a href="{{ asset('storage/' . $reservasi->bukti_pembayaran) }}" target="_blank">Lihat File</a>
-                    @endif
-                @else
-                    <span class="text-muted">–</span>
-                @endif
-            </td>
-            <td>
-                <a href="{{ route('reservasi.edit', $reservasi->id_reservasi) }}" class="btn btn-sm btn-warning">Edit</a>
-                <form action="{{ route('reservasi.destroy', $reservasi->id_reservasi) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button onclick="return confirm('Yakin ingin menghapus?')" class="btn btn-sm btn-danger">Hapus</button>
-                </form>
-            </td>
-        </tr>
-    @endforeach
-</tbody>
-
-
-</table>
-
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $reservasi->paket->nama_paket ?? '-' }}</td>
+                        <td>{{ $reservasi->nama_pelanggan }}</td>
+                        <td>{{ $reservasi->alamat ?? '-' }}</td> {{-- ✅ Menampilkan alamat --}}
+                        {{-- <td>{{ $detail->tujuan ?? '-' }}</td> --}}
+                        <td>{{ $reservasi->no_hp ?? '-' }}</td>
+                        {{-- <td>{{ $detail->alamat_penjemputan ?? '-' }}</td> --}}
+                        <td>{{ \Carbon\Carbon::parse($reservasi->tanggal_pesan)->format('d-m-Y') }}</td>
+                        {{-- <td>
+                            @if($reservasi->bukti_pembayaran)
+                                @php
+                                    $ext = pathinfo($reservasi->bukti_pembayaran, PATHINFO_EXTENSION);
+                                @endphp
+                                @if(in_array(strtolower($ext), ['jpg','jpeg','png','gif']))
+                                    <a href="{{ asset('storage/' . $reservasi->bukti_pembayaran) }}" target="_blank">
+                                        <img src="{{ asset('storage/' . $reservasi->bukti_pembayaran) }}" alt="Bukti" width="60">
+                                    </a>
+                                @else
+                                    <a href="{{ asset('storage/' . $reservasi->bukti_pembayaran) }}" target="_blank">Lihat File</a>
+                                @endif
+                            @else
+                                <span class="text-muted">–</span>
+                            @endif
+                        </td> --}}
+                        <td>
+                            <a href="{{ route('reservasi.show', $reservasi->id_reservasi) }}" class="btn btn-sm btn-info">Lihat</a>
+                            <a href="{{ route('reservasi.edit', $reservasi->id_reservasi) }}" class="btn btn-sm btn-warning">Edit</a>
+                            <form action="{{ route('reservasi.destroy', $reservasi->id_reservasi) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button onclick="return confirm('Yakin ingin menghapus?')" class="btn btn-sm btn-danger">Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
         </div>
-        {{-- {{ $reservasis->links() }} --}}
     @endif
 </div>
 @endsection
-

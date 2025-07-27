@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BankController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PaketController;
@@ -15,8 +16,10 @@ use App\Http\Controllers\PenumpangController;
 use App\Http\Controllers\ReservasiController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\StatusPembayaranUser;
+use App\Http\Controllers\BankUserController;
 use App\Http\Controllers\HalamanPelangganController;
 use App\Http\Controllers\ReservasiPelangganController;
+use App\Http\Controllers\User\BankUserController as UserBankUserController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -26,6 +29,11 @@ use App\Http\Controllers\ReservasiPelangganController;
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // });
+
+Route::get('/reservasi/sukses', [ReservasiPelangganController::class, 'sukses'])
+    ->name('reservasi.pelanggan.sukses');
+
+Route::get('/admin/bukti-transfer', [BankController::class, 'buktiTransfer'])->name('admin.bukti_tf.index');
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
@@ -85,5 +93,14 @@ Route::get('/reservasi/pelanggan/create', [ReservasiPelangganController::class, 
 Route::post('/reservasi/pelanggan/store', [ReservasiPelangganController::class, 'store'])->name('reservasi.pelanggan.store');
 
 Route::get('/status-pembayaran', [StatusPembayaranUser::class, 'index'])->name('user.status.pembayaran');
+
+
+Route::post('/reservasi/{id}/konfirmasi', [ReservasiController::class, 'konfirmasi'])->name('reservasi.konfirmasi');
+
+
+Route::resource('banks', BankController::class);
+Route::get('/bank', [BankUserController::class, 'index'])->name('user.banks.index');
+Route::get('/bukti-transfer/create', [BankUserController::class, 'create'])->name('bukti_tf.create');
+Route::post('/bukti-transfer', [BankUserController::class, 'store'])->name('bukti_tf.store');
 
 

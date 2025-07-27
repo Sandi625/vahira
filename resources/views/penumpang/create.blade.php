@@ -16,43 +16,49 @@
 
         <form action="{{ route('penumpang.store') }}" method="POST">
             @csrf
-        <div class="form-group mb-3">
-    <label>Reservasi (Customer - Tujuan)</label>
-    <select name="id_reservasi" class="form-control" required>
-        <option value="">Pilih Reservasi</option>
-        @foreach($reservasis as $reservasi)
-            <option value="{{ $reservasi->id_reservasi }}">
-                {{ $reservasi->customer->nama_customer ?? '-' }} - {{ $reservasi->tujuan }}
-            </option>
-        @endforeach
-    </select>
-</div>
 
             <div class="form-group mb-3">
-                <label>Nama</label>
-                <input type="text" name="nama" class="form-control" required>
+                <label>Reservasi (Customer - Tujuan)</label>
+                <select name="id_reservasi" class="form-control" required>
+                    <option value="">Pilih Reservasi</option>
+                    @foreach($reservasis as $reservasi)
+                        <option value="{{ $reservasi->id_reservasi }}">
+                            {{ $reservasi->customer->nama_customer ?? '-' }} - {{ $reservasi->tujuan }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
+
             <div class="form-group mb-3">
-                <label>Alamat</label>
-                <textarea name="alamat" class="form-control" required></textarea>
+                <label>Detail Reservasi (Opsional)</label>
+                <select name="id_detail_reservasi" class="form-control">
+                    <option value="">Tanpa Detail</option>
+                    @foreach($reservasis as $reservasi)
+                        @foreach($reservasi->detailReservasi as $detail)
+                            <option value="{{ $detail->id }}">
+                                {{ $detail->nama_customer }}
+                            </option>
+                        @endforeach
+                    @endforeach
+                </select>
             </div>
+
             <button type="submit" class="btn btn-primary">Simpan</button>
             <a href="{{ route('penumpang.index') }}" class="btn btn-secondary">Kembali</a>
         </form>
     </div>
 
     @if (session('success'))
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            Swal.fire({
-                icon: 'success',
-                title: 'Berhasil!',
-                text: '{{ session('success') }}',
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: 'OK'
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: '{{ session('success') }}',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                });
             });
-        });
-    </script>
-@endif
-
+        </script>
+    @endif
 @endsection

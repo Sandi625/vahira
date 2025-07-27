@@ -36,11 +36,13 @@ public function updateProfile(Request $request)
     $request->validate([
         'name' => 'required|string|max:255',
         'email' => 'required|email|max:255|unique:users,email,' . $user->id,
+        'no_hp' => 'required|string|max:20',
         'password' => 'nullable|string|min:8|confirmed',
     ]);
 
     $user->name = $request->name;
     $user->email = $request->email;
+    $user->no_hp = $request->no_hp;
 
     if ($request->filled('password')) {
         $user->password = Hash::make($request->password);
@@ -50,5 +52,6 @@ public function updateProfile(Request $request)
 
     return redirect()->route('akun.profile')->with('success', 'Profil berhasil diperbarui.');
 }
+
 
 }

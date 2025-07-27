@@ -14,21 +14,31 @@ public function up(): void
     Schema::create('reservasis', function (Blueprint $table) {
         $table->id('id_reservasi');
 
-        $table->unsignedBigInteger('id_customer')->nullable(); // tetap dipertahankan
-        $table->unsignedBigInteger('id_user'); // kolom relasi ke users
+        $table->unsignedBigInteger('id_user');    // relasi ke users
+        $table->unsignedBigInteger('id_paket');   // relasi ke pakets
 
-        $table->string('nama_customer')->nullable();
-        $table->string('tujuan')->nullable();
+        $table->string('nama_pelanggan');
+        $table->string('alamat');
         $table->string('no_hp')->nullable();
-        $table->date('tanggal_reservasi');
-        $table->string('bukti_pembayaran')->nullable();
+        // $table->string('jumlah_pembayaran');
+        // $table->string('metode_pembayaran');
+        $table->string('tanggal_pesan');
+        $table->string('tanggal_berangkat');
+        // $table->string('bukti_pembayaran')->nullable();
+        $table->enum('status', ['DITERIMA', 'SEDANG DIPROSES', 'DITOLAK'])->nullable();
+
+        // ✅ Tambahan kolom peran
+        $table->enum('peran', ['PEMESAN_SAJA', 'PEMESAN_DAN_PENUMPANG'])->default('PEMESAN_SAJA');
 
         $table->timestamps();
 
-        $table->foreign('id_customer')->references('id_customer')->on('customers')->onDelete('cascade');
-        $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade'); // relasi ke users
+        $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+        $table->foreign('id_paket')->references('id')->on('pakets')->onDelete('cascade');
     });
 }
+
+
+
 
 
 

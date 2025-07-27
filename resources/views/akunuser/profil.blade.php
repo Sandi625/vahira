@@ -25,6 +25,10 @@
                                 <td>{{ $user->email }}</td>
                             </tr>
                             <tr>
+                                <th>Nomor HP</th>
+                                <td>{{ $user->no_hp ?? '-' }}</td>
+                            </tr>
+                            <tr>
                                 <th>Role</th>
                                 <td>{{ ucfirst($user->role->value ?? $user->role) }}</td>
                             </tr>

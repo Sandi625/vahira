@@ -22,5 +22,7 @@
 <script src="{{ asset('AdminLTE/dist/js/adminlte.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> {{-- Load Chart.js sekali saja --}}
 @yield('scripts') {{-- Ini tempat inject script chart kamu --}}
+    @stack('scripts')
+
 </body>
 </html>

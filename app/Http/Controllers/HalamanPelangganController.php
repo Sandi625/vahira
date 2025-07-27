@@ -38,12 +38,14 @@ public function dashboard()
 {
     $user = Auth::user();
 
-    $pembayarans = Pembayaran::whereHas('reservasi', function ($query) use ($user) {
-        $query->where('id_user', $user->id);
-    })->with('reservasi')->latest()->get();
+    $reservasis = Reservasi::where('id_user', $user->id)
+        ->with([ 'detailReservasi']) // opsional: eager load semua
+        ->latest()
+        ->get();
 
-    return view('pelanggan.dashboard', compact('pembayarans'));
+    return view('pelanggan.dashboard', compact('reservasis'));
 }
+
 
 
 }

@@ -25,24 +25,27 @@ public function edit()
 public function update(Request $request)
 {
     /** @var \App\Models\User $user */
-    $user = Auth::user(); // pastikan ini benar-benar mengembalikan instance User
+    $user = Auth::user();
 
     $request->validate([
         'name' => 'required|string|max:255',
         'email' => 'required|email|max:255|unique:users,email,' . $user->id,
+        'no_hp' => 'nullable|string|max:20', // tambahkan validasi untuk no_hp
         'password' => 'nullable|string|min:8|confirmed',
     ]);
 
     $user->name = $request->name;
     $user->email = $request->email;
+    $user->no_hp = $request->no_hp; // tambahkan ini
 
     if ($request->filled('password')) {
         $user->password = Hash::make($request->password);
     }
 
-    $user->save(); // seharusnya tidak error
+    $user->save();
 
     return redirect()->route('akun.index')->with('success', 'Akun berhasil diperbarui.');
 }
+
 
 }

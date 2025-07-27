@@ -10,7 +10,7 @@ class User extends Authenticatable // Extend the Authenticatable class
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'email', 'password', 'role'];
+    protected $fillable = ['name', 'email','no_hp', 'password', 'role'];
 
     // Define the role as an enum
     protected $casts = [

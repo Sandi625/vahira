@@ -1,44 +1,46 @@
-@extends('layout.app') <!-- atau layouts.user jika ada -->
+@extends('layout.app')
 
 @section('content')
-    <div class="container mt-4">
-        <h3>Status Pembayaran Anda</h3>
+<div class="container mt-4">
+    <h2>Status Pembayaran Anda</h2>
 
+    @if($reservasis->isEmpty())
+        <div class="alert alert-warning">Tidak ada data reservasi.</div>
+    @else
         <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Tujuan</th>
-                    <th>Jumlah</th>
-                    <th>Metode</th>
+                    <th>Nama Pelanggan</th>
+                    <th>Jumlah Pembayaran</th>
+                    <th>Metode Pembayaran</th>
                     <th>Status</th>
-                    <th>Tanggal</th>
+                    <th>Tanggal Pesan</th>
+                    <th>Tanggal Berangkat</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($pembayarans as $pembayaran)
+                @foreach ($reservasis as $index => $reservasi)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $pembayaran->reservasi->tujuan ?? '-' }}</td>
-                        <td>{{ number_format($pembayaran->jumlah_pembayaran) }}</td>
-                        <td>{{ $pembayaran->metode_pembayaran }}</td>
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ $reservasi->nama_pelanggan }}</td>
+                        <td>Rp{{ number_format($reservasi->jumlah_pembayaran, 0, ',', '.') }}</td>
+                        <td>{{ $reservasi->metode_pembayaran }}</td>
                         <td>
-                            @if ($pembayaran->status_pembayaran === 'DITERIMA')
+                            @if ($reservasi->status === 'DITERIMA')
                                 <span class="badge bg-success">DITERIMA</span>
-                            @elseif ($pembayaran->status_pembayaran === 'TIDAK DITERIMA')
-                                <span class="badge bg-danger">TIDAK DITERIMA</span>
+                            @elseif ($reservasi->status === 'DITOLAK')
+                                <span class="badge bg-danger">DITOLAK</span>
                             @else
-                                <span class="badge bg-secondary">MENUNGGU</span>
+                                <span class="badge bg-warning text-dark">SEDANG DIPROSES</span>
                             @endif
                         </td>
-                        <td>{{ $pembayaran->tanggal_pembayaran }}</td>
+                        <td>{{ $reservasi->tanggal_pesan->format('d-m-Y') }}</td>
+                        <td>{{ $reservasi->tanggal_berangkat->format('d-m-Y') }}</td>
                     </tr>
-                @empty
-                    <tr>
-                        <td colspan="6" class="text-center">Belum ada pembayaran</td>
-                    </tr>
-                @endforelse
+                @endforeach
             </tbody>
         </table>
-    </div>
+    @endif
+</div>
 @endsection

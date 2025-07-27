@@ -335,31 +335,43 @@
 <!-- packages section starts  -->
 
 <section class="packages" id="packages">
-
     <h1 class="heading">popular packages</h1>
 
     <div class="box-container">
         @foreach ($pakets as $paket)
-            <div class="box">
-                <div class="image">
-                    <img src="{{ asset($paket->foto) }}" alt="Foto Paket" class="card-img-top">
-                </div>
-                <div class="content">
-                    <h3>{{ $paket->judul }}</h3>
-                    <p>{{ Str::limit(strip_tags($paket->deskripsi), 100) }}</p>
-                    <p class="card-text"><strong>Harga:</strong> Rp {{ number_format($paket->harga, 0, ',', '.') }}</p>
+            @if ($paket->status === 'KOUTA_TERSEDIA' || $paket->status === 'BERANGKAT_TANPA_PENUH')
+                <div class="box">
+                    <div class="image">
+                        <img src="{{ asset($paket->foto) }}" alt="Foto Paket" class="card-img-top">
+                    </div>
+                    <div class="content">
+                        <h3>{{ $paket->nama_paket }}</h3>
+                        <p>{{ Str::limit(strip_tags($paket->deskripsi), 100) }}</p>
+                        <p class="card-text"><strong>Harga:</strong> Rp {{ number_format($paket->harga, 0, ',', '.') }}</p>
+                        <p class="card-text"><strong>Kuota Bangku:</strong> {{ $paket->kuota }}</p> {{-- ✅ Tampilkan kuota --}}
+                        <p class="card-text">
+                            <strong>Status:</strong>
+                            @if ($paket->status === 'KOUTA_TERSEDIA')
+                                <span class="text-success">Kuota Tersedia</span>
+                            @elseif ($paket->status === 'BERANGKAT_TANPA_PENUH')
+                                <span class="text-warning">Berangkat (Tidak Penuh)</span>
+                            @endif
+                        </p>
 
-                    @auth
-                        <a href="#" class="btn">explore now</a>
-                    @else
-                        <a href="{{ route('login') }}" class="btn">Pesan</a>
-                    @endauth
+                        @auth
+                            <a href="#" class="btn">explore now</a>
+                        @else
+                            <a href="{{ route('login') }}" class="btn">Pesan</a>
+                        @endauth
+                    </div>
                 </div>
-            </div>
+            @endif
         @endforeach
     </div>
-
 </section>
+
+
+
 
 
 

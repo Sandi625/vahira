@@ -44,7 +44,7 @@
                 </li>
 
 
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{ route('pelanggan.index') }}"
                         class="nav-link {{ request()->routeIs('pelanggan.index') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -52,7 +52,24 @@
                             Pesan
                         </p>
                     </a>
+                </li> --}}
+                <li class="nav-item">
+                    <a href="{{ route('user.banks.index') }}"
+                        class="nav-link {{ request()->is('banks') ? 'active' : '' }}">
+                        <i class="fas fa-university nav-icon"></i>
+                        <p>Info Bank</p>
+                    </a>
                 </li>
+
+                <li class="nav-item">
+    <a href="{{ route('reservasi.pelanggan.sukses') }}"
+       class="nav-link {{ request()->routeIs('reservasi.pelanggan.sukses') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-check-circle"></i>
+        <p>Total Harga</p>
+    </a>
+</li>
+
+
                 <li class="nav-item">
                     <a href="{{ route('user.status.pembayaran') }}"
                         class="nav-link {{ request()->routeIs('user.status.pembayaran') ? 'active' : '' }}">
@@ -60,6 +77,8 @@
                         <p>Status Pembayaran</p>
                     </a>
                 </li>
+
+
 
                 <li class="nav-item">
                     <a href="{{ route('akun.profile') }}"

@@ -25,6 +25,12 @@
         </div>
 
         <div class="mb-3">
+            <label>Nomor HP</label>
+            <input type="text" name="no_hp" class="form-control" value="{{ old('no_hp', $user->no_hp) }}">
+            @error('no_hp') <div class="text-danger">{{ $message }}</div> @enderror
+        </div>
+
+        <div class="mb-3">
             <label>Password Baru (kosongkan jika tidak ingin mengganti)</label>
             <input type="password" name="password" class="form-control">
             @error('password') <div class="text-danger">{{ $message }}</div> @enderror
@@ -39,4 +45,3 @@
     </form>
 </div>
 @endsection
-

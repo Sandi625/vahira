@@ -57,7 +57,7 @@
     </div>
 
     <!-- Riwayat Pembayaran -->
-    <div class="mt-5">
+    {{-- <div class="mt-5">
         <h4 class="mb-3">Riwayat Pembayaran Anda</h4>
         <table class="table table-bordered table-hover">
             <thead class="table-light">
@@ -97,6 +97,6 @@
                 @endforelse
             </tbody>
         </table>
-    </div>
+    </div> --}}
 </div>
 @endsection

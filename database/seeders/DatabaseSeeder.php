@@ -13,6 +13,8 @@ class DatabaseSeeder extends Seeder
      */
   public function run(): void
 {
+            $this->call(PaketSeeder::class);
+
     // Seed a few test users with passwords from 1 to 8
     User::factory()->create([
         'name' => 'Test User',

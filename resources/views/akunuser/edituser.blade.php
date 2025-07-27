@@ -46,6 +46,20 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="no_hp" class="form-label">Nomor HP</label>
+                    <input
+                        type="text"
+                        name="no_hp"
+                        id="no_hp"
+                        class="form-control @error('no_hp') is-invalid @enderror"
+                        value="{{ old('no_hp', $user->no_hp) }}"
+                    >
+                    @error('no_hp')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
                     <label for="password" class="form-label">Password Baru <small class="text-muted">(kosongkan jika tidak ingin mengganti)</small></label>
                     <input
                         type="password"
@@ -75,5 +89,4 @@
         </div>
     </div>
 </div>
-
 @endsection

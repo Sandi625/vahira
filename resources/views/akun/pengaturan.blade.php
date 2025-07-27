@@ -24,6 +24,10 @@
                                 <td class="align-middle">{{ $user->email }}</td>
                             </tr>
                             <tr>
+                                <th style="vertical-align: middle;">Nomor HP</th>
+                                <td class="align-middle">{{ $user->no_hp ?? '-' }}</td>
+                            </tr>
+                            <tr>
                                 <th style="vertical-align: middle;">Role</th>
                                 <td class="align-middle">{{ ucfirst($user->role->value) }}</td>
                             </tr>
