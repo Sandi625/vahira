@@ -15,6 +15,8 @@ class Reservasi extends Model
     protected $fillable = [
         'id_user',
         'id_paket',
+        'id_bukti_cash',   // ✅ ditambahkan agar bisa mass assign
+        'id_bukti_tf',     // ✅ ditambahkan agar bisa mass assign
         'nama_pelanggan',
         'no_hp',
         'alamat',
@@ -58,5 +60,28 @@ class Reservasi extends Model
     {
         return $this->hasMany(Penumpang::class, 'id_reservasi', 'id_reservasi');
     }
+
+    // ✅ Relasi ke bukti pembayaran cash
+ public function buktiCash()
+{
+    return $this->belongsTo(BuktiCash::class, 'id_bukti_cash');
 }
 
+public function buktiTf()
+{
+    return $this->belongsTo(BuktiTf::class, 'id_bukti_tf');
+}
+
+public function getJumlahPembayaranAttribute()
+{
+    if ($this->buktiTf) {
+        return $this->buktiTf->jumlah_transfer;
+    } elseif ($this->buktiCash) {
+        return $this->buktiCash->total_bayar;
+    }
+
+    return 0;
+}
+
+
+}

@@ -8,13 +8,19 @@ use Illuminate\Support\Facades\Auth;
 
 class StatusPembayaranUser extends Controller
 {
-    public function index()
-    {
-        $user = Auth::user();
+public function index()
+{
+    $user = Auth::user();
 
-        $reservasis = Reservasi::where('id_user', $user->id)->get();
+    // Ambil semua reservasi user beserta relasi bukti transfer dan cash
+    $reservasis = Reservasi::with(['buktiTf', 'buktiCash'])
+        ->where('id_user', $user->id)
+        ->get();
 
-        return view('pelanggan.status_pembayaran', compact('reservasis'));
-    }
+    return view('pelanggan.status_pembayaran', compact('reservasis'));
+}
+
+
+
 }
 

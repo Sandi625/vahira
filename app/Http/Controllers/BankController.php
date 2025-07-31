@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Bank;
 use App\Models\BuktiTf;
 
+use App\Models\BuktiCash;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
@@ -124,8 +125,10 @@ class BankController extends Controller
 public function buktiTransfer()
 {
     $buktiTransfers = BuktiTf::with(['bank', 'user'])->latest()->get();
+    $buktiCash = BuktiCash::latest()->get(); // ambil semua data cash
 
-    return view('user.bukti_tf.index', compact('buktiTransfers'));
+    return view('user.bukti_tf.index', compact('buktiTransfers', 'buktiCash'));
 }
+
 
 }

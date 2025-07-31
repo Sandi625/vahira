@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Geoscope</title>
+    <title>Vahira Gestalia</title>
 
     <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -21,19 +21,24 @@
 
 <header class="header">
 
-    <a href="#" class="logo"> <i class="fas fa-hiking"></i> Bintaro Travel. </a>
+   <a href="#" class="logo">
+  <img src="{{ asset('images/ini.jpg') }}" alt="Bintoro Travel Logo" style="height: 30px; vertical-align: middle; margin-right: 8px;">
+  Bintoro Travel
+</a>
+
 
  <nav class="navbar">
     <div id="nav-close" class="fas fa-times"></div>
     <a href="#home">home</a>
     <a href="#about">about</a>
-    <a href="#shop">shop</a>
+    {{-- <a href="#shop">shop</a> --}}
     <a href="#packages">packages</a>
     <a href="#reviews">reviews</a>
-    <a href="#blogs">blogs</a>
+    {{-- <a href="#blogs">blogs</a> --}}
 
     @guest
-        <a href="{{ route('login') }}">login</a>
+        <a href="{{ route('login') }}" style="font-weight: bold;">login</a>
+
     @endguest
 
     @auth
@@ -45,11 +50,11 @@
 </nav>
 
 
-    <div class="icons">
+    {{-- <div class="icons">
         <div id="menu-btn" class="fas fa-bars"></div>
         <a href="#" class="fas fa-shopping-cart"></a>
         <div id="search-btn" class="fas fa-search"></div>
-    </div>
+    </div> --}}
 
 </header>
 
@@ -57,7 +62,7 @@
 
 <!-- search form  -->
 
-<div class="search-form">
+{{-- <div class="search-form">
 
     <div id="close-search" class="fas fa-times"></div>
 
@@ -65,7 +70,7 @@
         <input type="search" name="" placeholder="search here..." id="search-box">
         <label for="search-box" class="fas fa-search"></label>
     </form>
-</div>
+</div> --}}
 
 <!-- home section starts  -->
 
@@ -77,16 +82,16 @@
 
             <div class="swiper-slide">
                 <div class="box" style="background: url(images/nusa.jpg) no-repeat;">
-                    <div class="content">
+                    {{-- <div class="content">
                         <span>Pantai</span>
                         <h3>Nusa Penida</h3>
                         <p></p>
-                        <a href="#" class="btn">get started</a>
+                        <a href="#" class="btn">get started</a> --}}
                     </div>
                 </div>
             </div>
 
-            <div class="swiper-slide">
+            {{-- <div class="swiper-slide">
                 <div class="box second" style="background: url(images/baluran.jpg) no-repeat;">
                     <div class="content">
                         <span>Savana</span>
@@ -95,9 +100,9 @@
                         <a href="#" class="btn">get started</a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="swiper-slide">
+            {{-- <div class="swiper-slide">
                 <div class="box" style="background: url(images/terakota.jpg) no-repeat;">
                     <div class="content">
                         <span>Desa</span>
@@ -108,10 +113,10 @@
                 </div>
             </div>
 
-        </div>
+        </div> --}}
 
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
+        {{-- <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div> --}}
 
     </div>
 
@@ -121,14 +126,14 @@
 
 <!-- category section starts  -->
 
-<section class="category">
+{{-- <section class="category">
 
     <h1 class="heading">Destinasi</h1>
 
     <div class="box-container">
 
         <div class="box">
-            <img src="images/baluran.jpg" alt="">
+            <img src="images/ijen.jpg" alt="">
             <h3>baluran</h3>
             <p>.</p>
             <a href="#" class="btn">read more</a>
@@ -157,7 +162,7 @@
 
     </div>
 
-</section>
+</section> --}}
 
 <!-- category section ends -->
 
@@ -166,167 +171,18 @@
 <section class="about" id="about">
 
     <div class="image">
-        <img src="images/8qq.jpg" alt="">
+        <img src="images/oke.jpg" alt="">
     </div>
 
     <div class="content">
-        <h3>memorable outdoor experiences</h3>
+        <h3>About Us</h3>
+        <p> Bintoro Tour and travel & Pariwisata adalah perusahaan yang bergerak di bidang transportasi dan pariwisata sejak tahun 2010. Berbasis di Kalibaru, Kabupaten Banyuwangi, kami menyediakan layanan transportasi antar kota dan perjalanan wisata dengan fokus utama pada area Jawa-Bali. Dengan pengalaman lebih dari 14 tahun, kami berkomitmen untuk memberikan pelayanan terbaik yang aman, nyaman, dan berkualitas kepada setiap pelanggan.</p>
 
         <a href="#" class="btn">read more</a>
     </div>
 
 </section>
 
-<!-- about section ends -->
-
-<!-- shop section starts  -->
-
-<section class="shop" id="shop">
-
-    <h1 class="heading">featured products</h1>
-
-    <div class="swiper product-slider">
-
-        <div class="swiper-wrapper">
-
-            <div class="swiper-slide slide">
-                <div class="image">
-                    <img src="images/product-1.jpg" alt="">
-                    <div class="icons">
-                        <a href="#" class="fas fa-shopping-cart"></a>
-                        <a href="#" class="fas fa-eye"></a>
-                        <a href="#" class="fas fa-share"></a>
-                    </div>
-                </div>
-                <div class="content">
-                    <h3>survival kits</h3>
-                    <div class="price"> $5.00 - $25.00 </div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="swiper-slide slide">
-                <div class="image">
-                    <img src="images/product-2.jpg" alt="">
-                    <div class="icons">
-                        <a href="#" class="fas fa-shopping-cart"></a>
-                        <a href="#" class="fas fa-eye"></a>
-                        <a href="#" class="fas fa-share"></a>
-                    </div>
-                </div>
-                <div class="content">
-                    <h3>survival kits</h3>
-                    <div class="price"> $5.00 - $25.00 </div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="swiper-slide slide">
-                <div class="image">
-                    <img src="images/product-3.jpg" alt="">
-                    <div class="icons">
-                        <a href="#" class="fas fa-shopping-cart"></a>
-                        <a href="#" class="fas fa-eye"></a>
-                        <a href="#" class="fas fa-share"></a>
-                    </div>
-                </div>
-                <div class="content">
-                    <h3>survival kits</h3>
-                    <div class="price"> $5.00 - $25.00 </div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="swiper-slide slide">
-                <div class="image">
-                    <img src="images/product-4.jpg" alt="">
-                    <div class="icons">
-                        <a href="#" class="fas fa-shopping-cart"></a>
-                        <a href="#" class="fas fa-eye"></a>
-                        <a href="#" class="fas fa-share"></a>
-                    </div>
-                </div>
-                <div class="content">
-                    <h3>survival kits</h3>
-                    <div class="price"> $5.00 - $25.00 </div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="swiper-slide slide">
-                <div class="image">
-                    <img src="images/product-5.jpg" alt="">
-                    <div class="icons">
-                        <a href="#" class="fas fa-shopping-cart"></a>
-                        <a href="#" class="fas fa-eye"></a>
-                        <a href="#" class="fas fa-share"></a>
-                    </div>
-                </div>
-                <div class="content">
-                    <h3>survival kits</h3>
-                    <div class="price"> $5.00 - $25.00 </div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="swiper-slide slide">
-                <div class="image">
-                    <img src="images/product-6.jpg" alt="">
-                    <div class="icons">
-                        <a href="#" class="fas fa-shopping-cart"></a>
-                        <a href="#" class="fas fa-eye"></a>
-                        <a href="#" class="fas fa-share"></a>
-                    </div>
-                </div>
-                <div class="content">
-                    <h3>survival kits</h3>
-                    <div class="price"> $5.00 - $25.00 </div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-
-    </div>
 
 </section>
 
@@ -396,7 +252,8 @@
                     <img src="images/pic-1.png" alt="">
                     <div class="info">
                         <h3>Dennis Nzioki</h3>
-                        <span>designer</span>
+                        <span>pelanggan</span>
+                        <p> wah sangat cepat dan nyaman</p>
                     </div>
                 </div>
             </div>
@@ -408,6 +265,7 @@
                     <div class="info">
                         <h3>Eston Max</h3>
                         <span>designer</span>
+                        <p>sangat terjangkau</p>
                     </div>
                 </div>
             </div>
@@ -457,7 +315,7 @@
 
 <!-- services section starts  -->
 
-<section class="services">
+{{-- <section class="services">
 
     <h1 class="heading"> what we offer </h1>
 
@@ -507,13 +365,13 @@
 
     </div>
 
-</section>
+</section> --}}
 
 <!-- services section ends -->
 
 <!-- blogs section starts  -->
 
-<section class="blogs" id="blogs">
+{{-- <section class="blogs" id="blogs">
 
     <h1 class="heading"> our daily posts </h1>
 
@@ -591,14 +449,14 @@
 
     </div>
 
-</section>
+</section> --}}
 
 
 <!-- blogs section ends -->
 
 <!-- newsletter section  -->
 
-<section class="newsletter">
+{{-- <section class="newsletter">
 
     <div class="content">
         <h1 class="heading">subscirbe now</h1>
@@ -609,9 +467,9 @@
         </form>
     </div>
 
-</section>
+</section> --}}
 
-<section class="clients">
+{{-- <section class="clients">
 
     <div class="swiper clients-slider">
         <div class="swiper-wrapper">
@@ -622,7 +480,7 @@
         </div>
     </div>
 
-</section>
+</section> --}}
 
 <!-- footer section starts  -->
 
@@ -634,13 +492,13 @@
             <h3>quick links</h3>
             <a href="#home">home</a>
             <a href="#about">about</a>
-            <a href="#shop">shop</a>
+            {{-- <a href="#shop">shop</a> --}}
             <a href="#packages">packages</a>
             <a href="#reviews">reviews</a>
-            <a href="#blogs">blogs</a>
+            {{-- <a href="#blogs">blogs</a> --}}
         </div>
 
-        <div class="box">
+        {{-- <div class="box">
             <h3>extra links</h3>
             <a href="#">my account</a>
             <a href="#">my order</a>
@@ -648,28 +506,24 @@
             <a href="#">ask questions</a>
             <a href="#">terms of use</a>
             <a href="#">privacy policy</a>
-        </div>
+        </div> --}}
 
         <div class="box">
             <h3>contact info</h3>
-            <a href="#"> <i class="fas fa-phone"></i> +123-456-7890 </a>
-            <a href="#"> <i class="fas fa-phone"></i> +111-222-3333 </a>
-            <a href="#"> <i class="fas fa-envelope"></i> Group4@gmail.com </a>
-            <a href="#"> <i class="fas fa-map"></i> Madaraka Kenya - 400104 </a>
+            <a href="#"> <i class="fas fa-phone"></i> 085333764801 (owner) </a>
+            <a href="#"> <i class="fas fa-phone"></i> 083140625906 (admin) </a>
+            <a href="#"> <i class="fas fa-envelope"></i> tegarbwi07@gmail.com </a>
         </div>
 
         <div class="box">
             <h3>follow us</h3>
-            <a href="#"> <i class="fab fa-facebook-f"></i> facebook </a>
-            <a href="#"> <i class="fab fa-twitter"></i> twitter </a>
-            <a href="#"> <i class="fab fa-instagram"></i> instagram </a>
-            <a href="#"> <i class="fab fa-linkedin"></i> linkedin </a>
-            <a href="#"> <i class="fab fa-github"></i> github </a>
+            <a href="#"> <i class="fab fa-facebook-f"></i> Bintoro Travel </a>
+            <a href="#"> <i class="fab fa-instagram"></i> bintorotravel </a>
         </div>
 
     </div>
 
-    <div class="credit">created by <span>Vahira</span> | all rights reserved!</div>
+    <div class="credit">created by <span>BintoroTravel</span> | all rights reserved!</div>
 
 </section>
 
@@ -678,16 +532,7 @@
 
 
 
-
-
-
-
-
-
-
-
 <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
-
 <!-- custom js file link  -->
 <script src="js/script.js"></script>
 

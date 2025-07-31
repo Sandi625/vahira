@@ -2,119 +2,162 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Registration Page (v2)</title>
-
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-
-    <!-- Font Awesome -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/fontawesome-free/css/all.min.css') }}">
-
-    <!-- icheck bootstrap -->
     <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
-
-    <!-- AdminLTE Theme Style -->
     <link rel="stylesheet" href="{{ asset('AdminLTE/dist/css/adminlte.min.css') }}">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #e0eafc, #cfdef3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: #ffffff;
+            width: 400px;
+            padding: 30px 25px;
+            border-radius: 15px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            background-color: #f9f9f9;
+        }
+
+        input:focus {
+            border-color: #00BFFF;
+            outline: none;
+        }
+
+        .text-danger {
+            font-size: 12px;
+            color: #e53935;
+            margin-top: -5px;
+            margin-bottom: 5px;
+        }
+
+        .btn-register {
+            width: 100%;
+            padding: 10px;
+            background: #00BFFF;
+            color: white;
+            font-weight: 500;
+            font-size: 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+
+        .btn-register:hover {
+            background: #007bbf;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 13px;
+        }
+
+        .login-link a {
+            color: #00BFFF;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        @media screen and (max-width: 480px) {
+            .container {
+                width: 90%;
+                padding: 25px 20px;
+            }
+        }
+    </style>
 </head>
 
-<body class="hold-transition register-page">
+<body>
 
-    <div class="register-box">
-        <div class="card card-outline card-primary">
-            <div class="card-header text-center">
-                <a href="{{ route('login') }}" class="h1"><b>Admin</b>LTE</a>
+    <div class="container">
+        <h2>Create Account</h2>
+        <form action="{{ route('register') }}" method="POST">
+            @csrf
+
+            <input type="text" name="name" placeholder="Full Name" value="{{ old('name') }}" required>
+            @error('name') <div class="text-danger">{{ $message }}</div> @enderror
+
+            <input type="text" name="alamat" placeholder="Alamat Lengkap" value="{{ old('alamat') }}" required>
+            @error('alamat') <div class="text-danger">{{ $message }}</div> @enderror
+
+            <input type="email" name="email" placeholder="Email Address" value="{{ old('email') }}" required>
+            @error('email') <div class="text-danger">{{ $message }}</div> @enderror
+
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="no_hp" placeholder="Nomor HP" value="{{ old('no_hp') }}" required>
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-phone"></span>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <p class="login-box-msg">Register a new membership</p>
+            @error('no_hp') <div class="text-danger">{{ $message }}</div> @enderror
 
-                <!-- Registration Form -->
-                <form action="{{ route('register') }}" method="POST">
-                    @csrf
+            <input type="password" name="password" placeholder="Password" required>
+            @error('password') <div class="text-danger">{{ $message }}</div> @enderror
 
-                    <!-- Name Input -->
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="name" placeholder="Full name"
-                            value="{{ old('name') }}" required>
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-user"></span>
-                            </div>
-                        </div>
-                    </div>
-                    @error('name')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
+            <input type="password" name="password_confirmation" placeholder="Confirm Password" required>
 
-                    <!-- Email Input -->
-                    <div class="input-group mb-3">
-                        <input type="email" class="form-control" name="email" placeholder="Email"
-                            value="{{ old('email') }}" required>
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
-                            </div>
-                        </div>
-                    </div>
-                    @error('email')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
+            <button type="submit" class="btn-register">Register</button>
+        </form>
 
-                    <!-- Nomor HP Input -->
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="no_hp" placeholder="Nomor HP"
-                            value="{{ old('no_hp') }}" required>
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-phone"></span>
-                            </div>
-                        </div>
-                    </div>
-                    @error('no_hp')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
-
-                    <!-- Password Input -->
-                    <div class="input-group mb-3">
-                        <input type="password" class="form-control" name="password" placeholder="Password" required>
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
-                    </div>
-                    @error('password')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
-
-                    <!-- Password Confirmation Input -->
-                    <div class="input-group mb-3">
-                        <input type="password" class="form-control" name="password_confirmation"
-                            placeholder="Retype password" required>
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Terms Checkbox -->
-                    <div class="row">
-                        <div class="col-8 d-flex align-items-center">
-                            <a href="{{ route('login') }}" class="btn btn-link">Sudah punya akun? Login</a>
-                        </div>
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Register</button>
-                        </div>
-
-
-                </form>
-            </div>
+        <div class="login-link">
+            Sudah punya akun? <a href="{{ route('login') }}">Login</a>
         </div>
     </div>
 
+    <!-- SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if(session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: '{{ session('success') }}',
+            timer: 2000,
+            showConfirmButton: false
+        });
+    </script>
+    @endif
 
     <!-- jQuery -->
     <script src="{{ asset('AdminLTE/plugins/jquery/jquery.min.js') }}"></script>
@@ -123,20 +166,5 @@
     <!-- AdminLTE App -->
     <script src="{{ asset('AdminLTE/dist/js/adminlte.min.js') }}"></script>
 </body>
-
-<!-- Tambahkan SweetAlert2 -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-@if (session('success'))
-    <script>
-        Swal.fire({
-            icon: 'success',
-            title: 'Berhasil!',
-            text: '{{ session('success') }}',
-            timer: 2000,
-            showConfirmButton: false
-        });
-    </script>
-@endif
 
 </html>

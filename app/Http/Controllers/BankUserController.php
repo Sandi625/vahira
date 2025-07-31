@@ -41,8 +41,8 @@ public function store(Request $request)
         'catatan' => 'nullable|string|max:255',
     ]);
 
-    $bukti = new BuktiTf($request->except('bukti_transfer'));
-    $bukti->user_id = Auth::id(); // Tambahkan user_id dari yang login
+    $bukti = new \App\Models\BuktiTf($request->except('bukti_transfer'));
+    $bukti->user_id = Auth::id(); // Hubungkan ke user
 
     if ($request->hasFile('bukti_transfer')) {
         $file = $request->file('bukti_transfer');
@@ -53,7 +53,19 @@ public function store(Request $request)
 
     $bukti->save();
 
+    // ✅ Hubungkan bukti transfer ke reservasi milik user
+    $reservasi = \App\Models\Reservasi::where('id_user', Auth::id())
+        ->whereNull('id_bukti_tf')
+        ->latest()
+        ->first();
+
+    if ($reservasi) {
+        $reservasi->id_bukti_tf = $bukti->id;
+        $reservasi->save();
+    }
+
     return redirect()->back()->with('success', 'Bukti transfer berhasil dikirim.');
 }
+
 
 }

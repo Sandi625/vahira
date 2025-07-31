@@ -56,6 +56,8 @@
 
 
 @yield('scripts') {{-- PENTING --}}
+    @stack('scripts')
+
 </body>
 
 

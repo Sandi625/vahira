@@ -60,7 +60,7 @@
                         </td> --}}
                         <td>
                             <a href="{{ route('reservasi.show', $reservasi->id_reservasi) }}" class="btn btn-sm btn-info">Lihat</a>
-                            <a href="{{ route('reservasi.edit', $reservasi->id_reservasi) }}" class="btn btn-sm btn-warning">Edit</a>
+                            {{-- <a href="{{ route('reservasi.edit', $reservasi->id_reservasi) }}" class="btn btn-sm btn-warning">Edit</a> --}}
                             <form action="{{ route('reservasi.destroy', $reservasi->id_reservasi) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')

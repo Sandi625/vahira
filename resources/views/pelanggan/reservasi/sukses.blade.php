@@ -18,6 +18,7 @@
         <p>Data total pembayaran tidak tersedia.</p>
     @endif
 
-    <a href="{{ route('user.banks.index') }}" class="btn btn-primary mt-3">Pindah Ke halaman Info bank atau Transfer</a>
+    <a href="{{ route('user.banks.index') }}" class="btn btn-primary mt-3">Pindah ke Halaman Info Bank atau Transfer</a>
+    <a href="{{ route('user.cash.index') }}" class="btn btn-success mt-3 ms-2">Bayar Tunai (Cash)</a>
 </div>
 @endsection

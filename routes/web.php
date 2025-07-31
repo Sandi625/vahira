@@ -8,15 +8,16 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PaketController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\PesananController;
+use App\Http\Controllers\BankUserController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\AkunUsersController;
+use App\Http\Controllers\BuktiCashController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PenumpangController;
 use App\Http\Controllers\ReservasiController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\StatusPembayaranUser;
-use App\Http\Controllers\BankUserController;
 use App\Http\Controllers\HalamanPelangganController;
 use App\Http\Controllers\ReservasiPelangganController;
 use App\Http\Controllers\User\BankUserController as UserBankUserController;
@@ -104,3 +105,11 @@ Route::get('/bukti-transfer/create', [BankUserController::class, 'create'])->nam
 Route::post('/bukti-transfer', [BankUserController::class, 'store'])->name('bukti_tf.store');
 
 
+// Tampilkan daftar pembayaran
+Route::get('/cash/list', [BuktiCashController::class, 'index'])->name('user.cash.list');
+
+// Tampilkan form pembayaran tunai
+Route::get('/cash', [BuktiCashController::class, 'create'])->name('user.cash.index');
+
+// Proses simpan pembayaran
+Route::post('/cash', [BuktiCashController::class, 'store'])->name('user.cash.store');

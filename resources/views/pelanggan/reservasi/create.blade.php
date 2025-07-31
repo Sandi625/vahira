@@ -116,7 +116,7 @@
 
 
             <!-- Tombol Tambah Customer -->
-            <button type="button" class="btn btn-success mb-3" id="add-detail-btn">+ Tambah Penumpang </button>
+            <button type="button" class="btn btn-success mb" id="add-detail-btn">+ Tambah Penumpang </button>
 
             <!-- Wrapper Detail Reservasi (disembunyikan dulu sampai tombol diklik) -->
             <div id="detail-wrapper" style="display: none;">

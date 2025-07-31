@@ -17,25 +17,29 @@ public function up(): void
         $table->unsignedBigInteger('id_user');    // relasi ke users
         $table->unsignedBigInteger('id_paket');   // relasi ke pakets
 
+        // 🔽 Relasi baru ke bukti pembayaran
+        $table->unsignedBigInteger('id_bukti_cash')->nullable();
+        $table->unsignedBigInteger('id_bukti_tf')->nullable();
+
         $table->string('nama_pelanggan');
         $table->string('alamat');
         $table->string('no_hp')->nullable();
-        // $table->string('jumlah_pembayaran');
-        // $table->string('metode_pembayaran');
         $table->string('tanggal_pesan');
         $table->string('tanggal_berangkat');
-        // $table->string('bukti_pembayaran')->nullable();
         $table->enum('status', ['DITERIMA', 'SEDANG DIPROSES', 'DITOLAK'])->nullable();
 
-        // ✅ Tambahan kolom peran
         $table->enum('peran', ['PEMESAN_SAJA', 'PEMESAN_DAN_PENUMPANG'])->default('PEMESAN_SAJA');
 
         $table->timestamps();
 
+        // 🔗 Foreign key
         $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
         $table->foreign('id_paket')->references('id')->on('pakets')->onDelete('cascade');
+        $table->foreign('id_bukti_cash')->references('id')->on('bukti_cash')->onDelete('set null');
+        $table->foreign('id_bukti_tf')->references('id')->on('bukti_tf')->onDelete('set null');
     });
 }
+
 
 
 
